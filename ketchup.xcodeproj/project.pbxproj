@@ -7,18 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3FC257312887D9230034E30C /* ketchupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC257302887D9230034E30C /* ketchupApp.swift */; };
+		3FC257312887D9230034E30C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC257302887D9230034E30C /* AppDelegate.swift */; };
 		3FC257332887D9230034E30C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC257322887D9230034E30C /* ContentView.swift */; };
 		3FC257352887D9250034E30C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC257342887D9250034E30C /* Assets.xcassets */; };
 		3FC257382887D9250034E30C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC257372887D9250034E30C /* Preview Assets.xcassets */; };
+		3FC2574628884ADB0034E30C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC2574528884ADB0034E30C /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3FC2572D2887D9230034E30C /* ketchup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ketchup.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3FC257302887D9230034E30C /* ketchupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ketchupApp.swift; sourceTree = "<group>"; };
+		3FC257302887D9230034E30C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FC257322887D9230034E30C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3FC257342887D9250034E30C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FC257372887D9250034E30C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3FC25744288836A60034E30C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3FC2574528884ADB0034E30C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +54,9 @@
 		3FC2572F2887D9230034E30C /* ketchup */ = {
 			isa = PBXGroup;
 			children = (
-				3FC257302887D9230034E30C /* ketchupApp.swift */,
+				3FC25744288836A60034E30C /* Info.plist */,
+				3FC2574528884ADB0034E30C /* main.swift */,
+				3FC257302887D9230034E30C /* AppDelegate.swift */,
 				3FC257322887D9230034E30C /* ContentView.swift */,
 				3FC257342887D9250034E30C /* Assets.xcassets */,
 				3FC257362887D9250034E30C /* Preview Content */,
@@ -111,6 +116,8 @@
 				Base,
 			);
 			mainGroup = 3FC257242887D9230034E30C;
+			packageReferences = (
+			);
 			productRefGroup = 3FC2572E2887D9230034E30C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,7 +145,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FC257332887D9230034E30C /* ContentView.swift in Sources */,
-				3FC257312887D9230034E30C /* ketchupApp.swift in Sources */,
+				3FC2574628884ADB0034E30C /* main.swift in Sources */,
+				3FC257312887D9230034E30C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +278,9 @@
 				DEVELOPMENT_TEAM = 435LRWY56J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ketchup/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Ketchup;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -279,12 +290,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramdan.ketchup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -299,6 +313,9 @@
 				DEVELOPMENT_TEAM = 435LRWY56J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ketchup/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Ketchup;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -308,12 +325,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramdan.ketchup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
