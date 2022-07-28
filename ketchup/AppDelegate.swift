@@ -63,9 +63,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSGestureRecognizerDelegate
                 win.dismiss(animated: true)
                 return;
             }
-            // update the time indicator then present it
+            // set window to appear on screen which contains mouse pointer
+            let mouseLocation = NSEvent.mouseLocation
+            let activeScreen = NSScreen.screens.first(where: { NSMouseInRect(mouseLocation, $0.frame, false) })
+            // update the time indicator of every content
             contentView.viewModel.contents.forEach { $0.toggleTimeIndicatorUpdate() }
-            win.present(animated: true)
+            win.present(animated: true, screen: activeScreen)
         }
     }
     
@@ -101,20 +104,29 @@ extension AppDelegate: ClipboardManagerDelegate
 
 extension NSWindow
 {
-    func present(animated: Bool = true)
+    func present(animated: Bool = true, screen: NSScreen? = nil)
     {
         guard self.isVisible == false
         else { return }
         
+        let xOrigin = screen?.visibleFrame.minX ?? 0
+        let yOrigin = screen?.visibleFrame.minY ?? 0
+        
+        if let size = screen?.frame.size
+        {
+            let contentSize = NSSize(width: size.width, height: 330)
+            self.setContentSize(contentSize)
+        }
+        
         guard animated
         else
         {
-            self.setFrameOrigin(CGPoint(x: 0, y: 0))
+            self.setFrameOrigin(CGPoint(x: xOrigin, y: yOrigin))
             self.makeKeyAndOrderFront(nil)
             return
         }
         
-        self.setFrameOrigin(CGPoint(x: 0, y: -self.frame.height))
+        self.setFrameOrigin(CGPoint(x: xOrigin, y: yOrigin - self.frame.height))
         self.makeKeyAndOrderFront(nil)
         
         let animation = CAKeyframeAnimation()
@@ -128,7 +140,8 @@ extension NSWindow
         path.move(to: origin)
         
         for i in stride(from: self.frame.origin.y, to: origin.y, by: 1) {
-            path.addLine(to: CGPoint(x: 0, y: CGFloat(i)))
+            let movePoint = CGPoint(x: origin.x, y: CGFloat(i))
+            path.addLine(to: movePoint)
         }
         animation.path = path;
             
@@ -159,7 +172,8 @@ extension NSWindow
         path.move(to: origin)
         
         for i in stride(from: self.frame.origin.y, to: origin.y, by: -1) {
-            path.addLine(to: CGPoint(x: 0, y: CGFloat(i)))
+            let movePoint = CGPoint(x: origin.x, y: CGFloat(i))
+            path.addLine(to: movePoint)
         }
         animation.path = path;
         
@@ -169,56 +183,5 @@ extension NSWindow
         }, completionHandler: {
             self.orderOut(nil)
         })
-    }
-    
-    func shakeWindow()
-    {
-        let numberOfShakes   = 3
-        let durationOfShake  = 0.25
-        let vigourOfShake    = 0.015
-
-        let frame = self.frame
-        let shakeAnimation = CAKeyframeAnimation()
-
-        let shakePath = CGMutablePath()
-        shakePath.move(to: CGPoint(x: frame.minX, y: frame.minY))
-
-        for _ in 0...numberOfShakes-1 {
-            shakePath.addLine(to: CGPoint(x: frame.minX - frame.size.width * vigourOfShake, y: frame.minY))
-            shakePath.addLine(to: CGPoint(x: frame.minX + frame.size.width * vigourOfShake, y: frame.minY))
-        }
-
-        shakePath.closeSubpath()
-
-        shakeAnimation.path = shakePath;
-        shakeAnimation.duration = durationOfShake;
-
-        self.animations = ["frameOrigin" : shakeAnimation]
-        self.animator().setFrameOrigin(self.frame.origin)
-    }
-    
-    func showAnimate(_ sender: Any?)
-    {
-        let isGoingDismissed = self.frame.origin.y >= 0
-        // make sure the view is shown before animation hits
-        self.makeKeyAndOrderFront(sender)
-        // create animation
-        let animation = CAKeyframeAnimation()
-        animation.duration = 0.25
-        animation.timingFunction = CAMediaTimingFunction(name: isGoingDismissed ? .easeIn : .easeOut)
-        // this is the destination origin
-        var origin = self.frame.origin
-        origin.y += isGoingDismissed ? -self.frame.height : self.frame.height
-        // path animation
-        let path = CGMutablePath()
-        path.move(to: origin)
-        
-        for i in stride(from: self.frame.origin.y, to: origin.y, by: isGoingDismissed ? -1 : 1) {
-            path.addLine(to: CGPoint(x: 0, y: CGFloat(i)))
-        }
-        animation.path = path;
-
-        self.animations = ["frameOrigin" : animation]
-        self.animator().setFrameOrigin(origin)
     }
 }

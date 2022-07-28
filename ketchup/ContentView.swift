@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var viewModel = ViewModel()
+    
+    @State var selectedIndex: Int = 0
 
     var body: some View {
         VStack {
@@ -26,11 +28,12 @@ struct ContentView: View {
                         Color.clear
                             .frame(width: 0)
                         // newest content always placed from the tail of the list
-                        // we want to display them first (top most left / leading)
-                        ForEach(viewModel.contents.reversed()) { content in
-                            PasteboardView(content: content)
+                        // we want to display them first (top most left / leading))
+                        ForEach(viewModel.contents.indices, id: \.self) { index in
+                            PasteboardView(content: viewModel.contents[index])
                                 .background(Color.white)
                                 .cornerRadius(10, antialiased: true)
+                                .border(index == selectedIndex ? .blue : .clear, width: 4)
                         }
                         Color.clear
                             .frame(width: 0)
@@ -40,7 +43,7 @@ struct ContentView: View {
             
             Spacer()
         }
-        .frame(width: NSScreen.main?.frame.width, height: 330, alignment: .center)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .background(.ultraThinMaterial)
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification), perform: { _ in
             NSApp.mainWindow?.standardWindowButton(.zoomButton)?.isHidden = true
