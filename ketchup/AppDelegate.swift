@@ -9,28 +9,31 @@ import SwiftUI
 
 class AppDelegate: NSObject, NSApplicationDelegate, NSGestureRecognizerDelegate
 {
+    private var clipboard: ClipboardManager!
     private var statusItem: NSStatusItem!
     private var window: NSWindow!
+    private var contentView: ContentView!
+    private var menu: NSMenu!
+    
+    @Published var toggleTimeIndicatorUpdate: Bool = false
     
     func applicationDidFinishLaunching(_ notification: Notification)
     {
+        clipboard = ClipboardManager()
+        clipboard.delegate = self
+        
+        contentView = ContentView()
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 0, height: 0),
             styleMask: [],
             backing: .buffered,
             defer: false
         )
-        window.contentViewController = NSHostingController(rootView: ContentView())
+        window.contentViewController = NSHostingController(rootView: contentView)
         window.level = .floating // makes the app always in front of other
         window.dismiss(animated: false)
         
-        // make status bar item
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        if let button = statusItem.button
-        {
-            button.image = NSImage(systemSymbolName: "pencil", accessibilityDescription: "Pencil")
-            button.action = #selector(onStatusBarClicked)
-        }
+        createStatusBar()
         
         // detects left mouse down outside of the window
         NSEvent.addGlobalMonitorForEvents(matching: .leftMouseDown) { [weak self] event in
@@ -40,9 +43,59 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSGestureRecognizerDelegate
     
     @objc func onStatusBarClicked()
     {
-        guard let win = NSApplication.shared.windows.first
+        guard let win = NSApplication.shared.windows.first,
+              let event = NSApp.currentEvent
         else { return }
-        win.isVisible ? win.dismiss(animated: true) : win.present(animated: true)
+        
+        // show menu on right mouse
+        if event.type == .rightMouseUp
+        {
+            statusItem.menu = menu
+            statusItem.button?.performClick(nil)
+            statusItem.menu = nil
+        }
+        // display content view on left view
+        else if event.type == .leftMouseUp
+        {
+            let dismissEvent = win.isVisible
+            if dismissEvent
+            {
+                win.dismiss(animated: true)
+                return;
+            }
+            // update the time indicator then present it
+            contentView.viewModel.contents.forEach { $0.toggleTimeIndicatorUpdate() }
+            win.present(animated: true)
+        }
+    }
+    
+    @objc func onQuit()
+    {
+        NSApplication.shared.terminate(self)
+    }
+    
+    func createStatusBar()
+    {
+        // make status bar item
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        if let button = statusItem.button
+        {
+            button.image = NSImage(systemSymbolName: "pencil", accessibilityDescription: "Pencil")
+            button.action = #selector(onStatusBarClicked)
+            button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+        }
+        
+        menu = NSMenu()
+        let menuItem1 = NSMenuItem(title: "Quit Ketchup", action: #selector(onQuit), keyEquivalent: "")
+        menu.addItem(menuItem1)
+    }
+}
+
+extension AppDelegate: ClipboardManagerDelegate
+{
+    func onNewContent(_ content: PasteboardContent)
+    {
+        contentView.viewModel.addContent(content)
     }
 }
 

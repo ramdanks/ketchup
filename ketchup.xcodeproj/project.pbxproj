@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F90085428925F9800CB6DD6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F90085328925F9800CB6DD6 /* ViewModel.swift */; };
+		3FB5BB262890DFE5009D685F /* ClipboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB5BB252890DFE5009D685F /* ClipboardManager.swift */; };
+		3FB5BB282890FD62009D685F /* PasteboardCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB5BB272890FD62009D685F /* PasteboardCategory.swift */; };
+		3FB5BB2A289124A9009D685F /* PasteboardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB5BB29289124A9009D685F /* PasteboardContent.swift */; };
+		3FB5BB2C28916D43009D685F /* PasteboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB5BB2B28916D43009D685F /* PasteboardView.swift */; };
 		3FC257312887D9230034E30C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC257302887D9230034E30C /* AppDelegate.swift */; };
 		3FC257332887D9230034E30C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC257322887D9230034E30C /* ContentView.swift */; };
 		3FC257352887D9250034E30C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC257342887D9250034E30C /* Assets.xcassets */; };
@@ -15,6 +20,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F90085328925F9800CB6DD6 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		3FB5BB252890DFE5009D685F /* ClipboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardManager.swift; sourceTree = "<group>"; };
+		3FB5BB272890FD62009D685F /* PasteboardCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardCategory.swift; sourceTree = "<group>"; };
+		3FB5BB29289124A9009D685F /* PasteboardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardContent.swift; sourceTree = "<group>"; };
+		3FB5BB2B28916D43009D685F /* PasteboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardView.swift; sourceTree = "<group>"; };
 		3FC2572D2887D9230034E30C /* ketchup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ketchup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC257302887D9230034E30C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FC257322887D9230034E30C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,11 +65,16 @@
 			isa = PBXGroup;
 			children = (
 				3FC25744288836A60034E30C /* Info.plist */,
+				3FB5BB252890DFE5009D685F /* ClipboardManager.swift */,
 				3FC2574528884ADB0034E30C /* main.swift */,
 				3FC257302887D9230034E30C /* AppDelegate.swift */,
+				3F90085328925F9800CB6DD6 /* ViewModel.swift */,
 				3FC257322887D9230034E30C /* ContentView.swift */,
 				3FC257342887D9250034E30C /* Assets.xcassets */,
 				3FC257362887D9250034E30C /* Preview Content */,
+				3FB5BB272890FD62009D685F /* PasteboardCategory.swift */,
+				3FB5BB29289124A9009D685F /* PasteboardContent.swift */,
+				3FB5BB2B28916D43009D685F /* PasteboardView.swift */,
 			);
 			path = ketchup;
 			sourceTree = "<group>";
@@ -144,9 +159,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FB5BB2A289124A9009D685F /* PasteboardContent.swift in Sources */,
+				3FB5BB262890DFE5009D685F /* ClipboardManager.swift in Sources */,
+				3FB5BB2C28916D43009D685F /* PasteboardView.swift in Sources */,
 				3FC257332887D9230034E30C /* ContentView.swift in Sources */,
 				3FC2574628884ADB0034E30C /* main.swift in Sources */,
 				3FC257312887D9230034E30C /* AppDelegate.swift in Sources */,
+				3F90085428925F9800CB6DD6 /* ViewModel.swift in Sources */,
+				3FB5BB282890FD62009D685F /* PasteboardCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +310,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramdan.ketchup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -325,7 +345,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramdan.ketchup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
