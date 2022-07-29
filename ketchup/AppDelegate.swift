@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import AppKit
 
+@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSGestureRecognizerDelegate
 {
     private var clipboard: ClipboardManager!
     private var statusItem: NSStatusItem!
-    private var window: NSWindow!
+    private var window: AppWindow!
     private var contentView: ContentView!
     private var menu: NSMenu!
     
@@ -22,23 +24,44 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSGestureRecognizerDelegate
         clipboard = ClipboardManager()
         clipboard.delegate = self
         
-        contentView = ContentView()
-        window = NSWindow(
+        window = AppWindow(
             contentRect: NSRect(x: 0, y: 0, width: 0, height: 0),
             styleMask: [],
             backing: .buffered,
             defer: false
         )
+        contentView = ContentView(onContentSelected: { [unowned self] content in
+            clipboard.setString(content.content ?? "", forType: .string)
+            window.dismiss(animated: true)
+        })
+        
         window.contentViewController = NSHostingController(rootView: contentView)
-        window.level = .floating // makes the app always in front of other
+        window.level = .modalPanel // makes the app always in front of other
         window.dismiss(animated: false)
         
         createStatusBar()
         
         // detects left mouse down outside of the window
-        NSEvent.addGlobalMonitorForEvents(matching: .leftMouseDown) { [weak self] event in
-            self?.window.dismiss(animated: true)
+        NSEvent.addGlobalMonitorForEvents(matching: .leftMouseDown) { [unowned self] event in
+            window.dismiss(animated: true)
         }
+        
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [unowned self] event in
+            switch event.keyCode
+            {
+            case Keycode.escape:
+                window.dismiss(animated: true)
+                break
+            case Keycode.leftArrow:
+                break
+            case Keycode.rightArrow:
+                break
+            default:
+                break
+            }
+            return event
+        }
+        
     }
     
     @objc func onStatusBarClicked()
@@ -80,10 +103,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSGestureRecognizerDelegate
     func createStatusBar()
     {
         // make status bar item
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         if let button = statusItem.button
         {
-            button.image = NSImage(systemSymbolName: "pencil", accessibilityDescription: "Pencil")
+            button.image = NSImage(named: "KetchupIcon")!
+            button.imageScaling = .scaleProportionallyUpOrDown
             button.action = #selector(onStatusBarClicked)
             button.sendAction(on: [.leftMouseUp, .rightMouseUp])
         }
@@ -114,7 +138,7 @@ extension NSWindow
         
         if let size = screen?.frame.size
         {
-            let contentSize = NSSize(width: size.width, height: 330)
+            let contentSize = NSSize(width: size.width, height: 270)
             self.setContentSize(contentSize)
         }
         

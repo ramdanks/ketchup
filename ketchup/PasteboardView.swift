@@ -55,20 +55,35 @@ struct PasteboardView: View {
             // content
             VStack {
                 Spacer(minLength: 60)
-                Color.white
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                Text("112 characters")
+                
+                ZStack(alignment: .leading)
+                {
+                    Color("ContentBackground")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    
+                    VStack
+                    {
+                        Text(content.content ?? "")
+                            .font(.system(size: 11))
+                            .padding([.top, .leading, .trailing], 10)
+                            .foregroundColor(Color("ContentForeground"))
+                        
+                        Spacer(minLength: 0)
+                    }
+                }
+                    
+                Text("\(content.content?.count ?? 0) characters")
                     .padding(8)
                     .font(.system(size: 10))
-                    .foregroundColor(.gray)
             }
         }
         .frame(width: 200, height: 200)
+        .background(Color("ContentBackground"))
     }
 }
 
 struct PasteboardView_Previews: PreviewProvider {
     static var previews: some View {
-        PasteboardView(content: PasteboardContent(date: Date()))
+        PasteboardView(content: PasteboardContent(date: Date(), content: "To elaborate on the two existing answers, there are a couple of approaches to making the background change based on light or dark mode (aka colorScheme) depending on what you're trying to achieve."))
     }
 }

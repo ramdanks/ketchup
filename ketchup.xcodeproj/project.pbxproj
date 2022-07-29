@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3F90085428925F9800CB6DD6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F90085328925F9800CB6DD6 /* ViewModel.swift */; };
+		3F9008562892DDB200CB6DD6 /* AppWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9008552892DDB200CB6DD6 /* AppWindow.swift */; };
+		3F9008582892DFE100CB6DD6 /* Keycode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9008572892DFE100CB6DD6 /* Keycode.swift */; };
+		3F90085A2892E2F200CB6DD6 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9008592892E2F200CB6DD6 /* Application.swift */; };
 		3FB5BB262890DFE5009D685F /* ClipboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB5BB252890DFE5009D685F /* ClipboardManager.swift */; };
 		3FB5BB282890FD62009D685F /* PasteboardCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB5BB272890FD62009D685F /* PasteboardCategory.swift */; };
 		3FB5BB2A289124A9009D685F /* PasteboardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB5BB29289124A9009D685F /* PasteboardContent.swift */; };
@@ -16,11 +19,13 @@
 		3FC257332887D9230034E30C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC257322887D9230034E30C /* ContentView.swift */; };
 		3FC257352887D9250034E30C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC257342887D9250034E30C /* Assets.xcassets */; };
 		3FC257382887D9250034E30C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FC257372887D9250034E30C /* Preview Assets.xcassets */; };
-		3FC2574628884ADB0034E30C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC2574528884ADB0034E30C /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3F90085328925F9800CB6DD6 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		3F9008552892DDB200CB6DD6 /* AppWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWindow.swift; sourceTree = "<group>"; };
+		3F9008572892DFE100CB6DD6 /* Keycode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keycode.swift; sourceTree = "<group>"; };
+		3F9008592892E2F200CB6DD6 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		3FB5BB252890DFE5009D685F /* ClipboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardManager.swift; sourceTree = "<group>"; };
 		3FB5BB272890FD62009D685F /* PasteboardCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardCategory.swift; sourceTree = "<group>"; };
 		3FB5BB29289124A9009D685F /* PasteboardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardContent.swift; sourceTree = "<group>"; };
@@ -31,7 +36,6 @@
 		3FC257342887D9250034E30C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FC257372887D9250034E30C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3FC25744288836A60034E30C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		3FC2574528884ADB0034E30C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,8 +69,8 @@
 			isa = PBXGroup;
 			children = (
 				3FC25744288836A60034E30C /* Info.plist */,
+				3F9008592892E2F200CB6DD6 /* Application.swift */,
 				3FB5BB252890DFE5009D685F /* ClipboardManager.swift */,
-				3FC2574528884ADB0034E30C /* main.swift */,
 				3FC257302887D9230034E30C /* AppDelegate.swift */,
 				3F90085328925F9800CB6DD6 /* ViewModel.swift */,
 				3FC257322887D9230034E30C /* ContentView.swift */,
@@ -75,6 +79,8 @@
 				3FB5BB272890FD62009D685F /* PasteboardCategory.swift */,
 				3FB5BB29289124A9009D685F /* PasteboardContent.swift */,
 				3FB5BB2B28916D43009D685F /* PasteboardView.swift */,
+				3F9008572892DFE100CB6DD6 /* Keycode.swift */,
+				3F9008552892DDB200CB6DD6 /* AppWindow.swift */,
 			);
 			path = ketchup;
 			sourceTree = "<group>";
@@ -159,11 +165,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F90085A2892E2F200CB6DD6 /* Application.swift in Sources */,
 				3FB5BB2A289124A9009D685F /* PasteboardContent.swift in Sources */,
+				3F9008562892DDB200CB6DD6 /* AppWindow.swift in Sources */,
 				3FB5BB262890DFE5009D685F /* ClipboardManager.swift in Sources */,
 				3FB5BB2C28916D43009D685F /* PasteboardView.swift in Sources */,
 				3FC257332887D9230034E30C /* ContentView.swift in Sources */,
-				3FC2574628884ADB0034E30C /* main.swift in Sources */,
+				3F9008582892DFE100CB6DD6 /* Keycode.swift in Sources */,
 				3FC257312887D9230034E30C /* AppDelegate.swift in Sources */,
 				3F90085428925F9800CB6DD6 /* ViewModel.swift in Sources */,
 				3FB5BB282890FD62009D685F /* PasteboardCategory.swift in Sources */,

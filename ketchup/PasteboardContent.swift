@@ -20,6 +20,8 @@ class PasteboardContent: ObservableObject, Identifiable
     
     var date: Date
     
+    var content: String?
+    
     var appBundleIdentifier: String?
     
     var icon: NSImage? { get {
@@ -43,9 +45,10 @@ class PasteboardContent: ObservableObject, Identifiable
         return "now"
     }}
     
-    public init(date: Date, appBundleIdentifier: String? = nil, appIcon: NSImage? = nil)
+    public init(date: Date, content: String?, appBundleIdentifier: String? = nil, appIcon: NSImage? = nil)
     {
         self.date = date
+        self.content = content
         self.appBundleIdentifier = appBundleIdentifier
         self.id = PasteboardContent.idIncrementingValue
         
